@@ -181,14 +181,160 @@ https://engineeringxpert.com/wp-content/uploads/2022/04/26.png
  
 
 ## STM 32 CUBE PROGRAM :
+```
+#include "main.h"
+#include "lcd.h"
+#include <stdbool.h>
+
+bool col1,col2,col3,col4;
+
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+
+void key(void);
+Lcd_PortType ports[] = {GPIOA,GPIOA,GPIOA,GPIOA};
+Lcd_PinType pins[] = {GPIO_PIN_3,GPIO_PIN_2,GPIO_PIN_1,GPIO_PIN_0};
+Lcd_HandleTypeDef lcd;
+
+int main(void)
+{
+ HAL_Init();
+ SystemClock_Config();
+ MX_GPIO_Init();
+ while (1)
+  {
+   key();
+  }
+}
+void key()
+{
+	Lcd_HandleTypeDef lcd;
+	lcd = Lcd_create(ports,pins,GPIOB,GPIO_PIN_0,GPIOB,GPIO_PIN_1,LCD_4_BIT_MODE);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_0,GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,GPIO_PIN_SET);
+
+	col1 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_4);
+	col2 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5);
+	col3 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_6);
+	col4 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7);
+	Lcd_cursor(&lcd,0,1);
+
+	if(!col1){
+		Lcd_string(&lcd,"Key 7\n");
+		HAL_Delay(1000);
+	}
+	else if(!col2){
+		Lcd_string(&lcd,"Key 8\n");
+		HAL_Delay(1000);
+	}
+	else if(!col3){
+			Lcd_string(&lcd,"Key 9\n");
+			HAL_Delay(1000);
+		}
+	else if(!col4){
+			Lcd_string(&lcd,"Key %\n");
+			HAL_Delay(1000);
+		}
 
 
+	lcd = Lcd_create(ports,pins,GPIOB,GPIO_PIN_0,GPIOB,GPIO_PIN_1,LCD_4_BIT_MODE);
+		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_0,GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,GPIO_PIN_SET);
 
+		col1 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_4);
+		col2 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5);
+		col3 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_6);
+		col4 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7);
+		Lcd_cursor(&lcd,0,1);
+
+		if(!col1){
+			Lcd_string(&lcd,"Key 4\n");
+			HAL_Delay(1000);
+		}
+		else if(!col2){
+			Lcd_string(&lcd,"Key 5\n");
+			HAL_Delay(1000);
+		}
+		else if(!col3){
+				Lcd_string(&lcd,"Key 6\n");
+				HAL_Delay(1000);
+			}
+		else if(!col4){
+				Lcd_string(&lcd,"Key x\n");
+				HAL_Delay(1000);
+			}
+
+		lcd = Lcd_create(ports,pins,GPIOB,GPIO_PIN_0,GPIOB,GPIO_PIN_1,LCD_4_BIT_MODE);
+			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_0,GPIO_PIN_SET);
+			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_SET);
+			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,GPIO_PIN_SET);
+
+			col1 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_4);
+			col2 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5);
+			col3 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_6);
+			col4 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7);
+			Lcd_cursor(&lcd,0,1);
+
+			if(!col1){
+				Lcd_string(&lcd,"Key 1\n");
+				HAL_Delay(1000);
+			}
+			else if(!col2){
+				Lcd_string(&lcd,"Key 2\n");
+				HAL_Delay(1000);
+			}
+			else if(!col3){
+					Lcd_string(&lcd,"Key 3\n");
+					HAL_Delay(1000);
+				}
+			else if(!col4){
+					Lcd_string(&lcd,"Key -\n");
+					HAL_Delay(1000);
+				}
+
+			lcd = Lcd_create(ports,pins,GPIOB,GPIO_PIN_0,GPIOB,GPIO_PIN_1,LCD_4_BIT_MODE);
+				HAL_GPIO_WritePin(GPIOC,GPIO_PIN_0,GPIO_PIN_SET);
+				HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_SET);
+				HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_SET);
+				HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,GPIO_PIN_RESET);
+
+				col1 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_4);
+				col2 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5);
+				col3 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_6);
+				col4 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7);
+				Lcd_cursor(&lcd,0,1);
+
+				if(!col1){
+					Lcd_string(&lcd,"Key ON/C\n");
+					HAL_Delay(1000);
+				}
+				else if(!col2){
+					Lcd_string(&lcd,"Key 0\n");
+					HAL_Delay(1000);
+				}
+				else if(!col3){
+						Lcd_string(&lcd,"Key =\n");
+						HAL_Delay(1000);
+					}
+				else if(!col4){
+						Lcd_string(&lcd,"Key +\n");
+						HAL_Delay(1000);
+					}
+}
+
+```
 ## Output screen shots of proteus  :
  
- 
- ## CIRCUIT DIAGRAM (EXPORT THE GRAPHICS TO PDF AND ADD THE SCREEN SHOT HERE): 
- 
+![img](https://github.com/Girithickrohan/EXPERIMENT--05-INTERFACING-A-4X4-MATRIX-KEYPAD-AND-DISPLAY-THE-OUTPUT-ON-LCD/blob/main/ex05.png)
+
+## CIRCUIT DIAGRAM (EXPORT THE GRAPHICS TO PDF AND ADD THE SCREEN SHOT HERE): 
+
+ ![img](https://github.com/Girithickrohan/EXPERIMENT--05-INTERFACING-A-4X4-MATRIX-KEYPAD-AND-DISPLAY-THE-OUTPUT-ON-LCD/blob/main/Screenshot%202026-03-16%20110448.png)
  
 ## Result :
 Interfacing a 4x4 keypad with ARM microcontroller are simulated in proteus and the results are verified.
